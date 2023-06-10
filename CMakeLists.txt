@@ -18,3 +18,15 @@ add_executable(${PROJECT_NAME}  main.cpp
 
 target_link_libraries(${PROJECT_NAME} lua_static)
 target_link_libraries(${PROJECT_NAME} jsoncpp_static)
+
+
+add_executable(serv             server.cpp 
+                                libs/card/card.cpp 
+                                libs/player/player.cpp 
+                                libs/database/database.cpp 
+                                libs/third-party/mongoose/mongoose.c
+                                )
+
+
+target_link_libraries(serv lua_static)
+target_link_libraries(serv jsoncpp_static)
