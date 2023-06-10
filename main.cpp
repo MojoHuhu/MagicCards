@@ -10,6 +10,7 @@ player ply[2];
 
 int main()
 {
+  
   read_json_db("CardsDB.json");        // cards database 
 
   ply[0].init(0);                     // Player          
