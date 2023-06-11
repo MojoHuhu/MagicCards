@@ -10,7 +10,9 @@ cardname = "cotton swab"
 
 
 function LuaMakesAction()
+    output ="Attack from Lua!\n"
     print("Attack from Lua!")
     player[1].health = player[1].health - math.random(1,10)
     print( player[0]['name'].."(".. player[0]['health']..")" .." hits "..  player[1]['name'] .."(".. player[1]['health']..")".." with " ..cardname )
+   return output ..player[0]['name'].."(".. player[0]['health']..")" .." hits "..  player[1]['name'] .."(".. player[1]['health']..")".." with " ..cardname 
 end

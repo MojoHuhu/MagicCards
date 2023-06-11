@@ -28,10 +28,11 @@ int main()
  int x =1;
   while (pl1 && pl0)                      //round
   {
+      std::string out_text;
       if(x>0) x=0; else x=1;
       std::cout << "Player " << x <<" turn\n";
-      pl0=ply[x].make_turn(ply[!x].get_attrebuts());   // Attack 0-> 1
-      
+      pl0=ply[x].make_turn(ply[!x].get_attrebuts(),out_text);   // Attack 0-> 1
+      //std::cout << out_text;
       if(ply[0].me["health"].asInt()<=0){ std::cout << ply[1].me["name"] <<" win the game!\n"; return 0;}
       if(ply[1].me["health"].asInt()<=0){ std::cout << ply[0].me["name"] <<" win the game!\n"; return 0;}
       

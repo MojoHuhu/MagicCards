@@ -85,14 +85,14 @@ player::~player()
 {
 }
 
-bool player::make_turn(Json::Value &enemy)
+bool player::make_turn(Json::Value &enemy,std::string &output_txt)
 {
   std::string getPlayerFunc = "function GetPlayer(n)\n"
                               "   return player[n]\n"
                               "end\n";
 
   for (int i = 0; i < deck.size(); i++)
-    execute_card(create_lua_table(me, enemy) + getPlayerFunc + deck[i].get_lua_code(), enemy);
+    execute_card(create_lua_table(me, enemy) + getPlayerFunc + deck[i].get_lua_code(), enemy,output_txt);
 
   if (enemy["health"].asInt() <= 0 || enemy["health"].asInt() <= 0)
     return false;
@@ -146,7 +146,7 @@ bool lua_get_player_state(lua_State *L, int index, Json::Value &ret)
     std::cout << lua_tostring(L, -1);
 }
 
-void player::execute_card(std::string lua_code_from_card, Json::Value &enemy)
+void player::execute_card(std::string lua_code_from_card, Json::Value &enemy,std::string &output_txt)
 {
   lua_State *L = luaL_newstate(); // create a new lua instance
   luaL_openlibs(L);               // give lua access to basic libraries
@@ -156,8 +156,11 @@ void player::execute_card(std::string lua_code_from_card, Json::Value &enemy)
   {
 
     lua_getglobal(L, "LuaMakesAction");
-    if (check_lua(L, lua_pcall(L, 0, 0, 0)))
+    if (check_lua(L, lua_pcall(L, 0, 1, 0)))
     {
+      if(lua_isstring(L, -1))
+       output_txt= lua_tostring(L, -1);
+
       lua_get_player_state(L, 0, me);
       lua_get_player_state(L, 1, enemy);
     }

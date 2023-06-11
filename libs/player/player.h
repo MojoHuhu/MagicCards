@@ -32,9 +32,9 @@ public:
 
     Json::Value & get_attrebuts(){return me;}
 
-    bool make_turn(Json::Value & enemy);
+    bool make_turn(Json::Value & enemy,std::string &output_txt);
 
-    void execute_card(std::string lua_code_from_card, Json::Value & enemy );
+    void execute_card(std::string lua_code_from_card, Json::Value & enemy ,std::string &output_txt);
 
     bool push_card(unsigned int id);
 
