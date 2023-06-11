@@ -21,6 +21,7 @@ target_link_libraries(${PROJECT_NAME} jsoncpp_static)
 
 
 add_executable(serv             server.cpp 
+                                libs/server/play.cpp
                                 libs/card/card.cpp 
                                 libs/player/player.cpp 
                                 libs/database/database.cpp 

@@ -34,6 +34,9 @@ int list_files_of_luaCards() {
 
 bool read_json_db(std::string filename)
 {
+    if(db.size())
+        return true;
+
     std::ifstream file(filename.c_str());
     Json::Reader reader;
 
